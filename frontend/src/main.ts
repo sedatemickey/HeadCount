@@ -1,0 +1,10 @@
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import VueKonva from 'vue-konva'
+import 'element-plus/dist/index.css'
+import './style.css'
+import App from './App.vue'
+
+createApp(App).use(createPinia()).use(ElementPlus, { locale: zhCn }).use(VueKonva).mount('#app')

@@ -1,0 +1,49 @@
+name: Local application checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows-cpu:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install and build
+        shell: pwsh
+        run: ./setup.ps1 -TestTools
+      - name: Backend checks
+        shell: pwsh
+        working-directory: backend
+        run: |
+          ./.venv/Scripts/python.exe -m ruff check app tests migrations
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          ./.venv/Scripts/python.exe -m pytest -q
+      - name: Frontend checks
+        shell: pwsh
+        working-directory: frontend
+        run: |
+          npm run format:check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm test
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm audit
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npx playwright install chromium
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: synthetic-browser-test-results
+          path: frontend/test-results/
+          retention-days: 7

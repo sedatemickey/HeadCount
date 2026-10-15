@@ -1,0 +1,27 @@
+# Never commit private data or local model overrides.
+/data/
+# Track only the bundled default artifact and its provenance documents.
+/models/*
+!/models/README.md
+!/models/head-detector.onnx
+!/models/head-detector.json
+!/models/NOTICE.md
+!/models/UPSTREAM_MODEL_CARD.md
+!/models/AGPL-3.0.txt
+/backend/.venv/
+**/__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+*.egg-info/
+*.tsbuildinfo
+/reports/
+/datasets/
+/backups/
+.env
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/test-results/
+frontend/playwright-report/
+*.log

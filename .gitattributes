@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Keep source line endings stable on Windows and Unix (also for Prettier/shell scripts).
+* text=auto eol=lf
+*.cmd text eol=crlf
+
+# Store real ONNX bytes in normal Git (also available in source ZIP archives).
+# No LFS filter: the bundled 103625405-byte artifact is below GitHub's 100 MiB limit.
+/models/head-detector.onnx binary -filter

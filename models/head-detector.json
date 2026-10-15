@@ -1,0 +1,14 @@
+{
+  "name": "yolo-head-medium",
+  "sha256": "19ae628e67095520fabe7b21eb54d2fd1c1dae93099cae68213b58d52aaa3e63",
+  "source_url": "https://huggingface.co/trysem/YOLOv8_head_detector/blob/5f9ba067b61589b3c8120059601a016c548006b5/yolo-head-medium.onnx",
+  "upstream_revision": "5f9ba067b61589b3c8120059601a016c548006b5",
+  "upstream_filename": "yolo-head-medium.onnx",
+  "size_bytes": 103625405,
+  "license": "AGPL-3.0 (ONNX metadata); MIT (upstream model card); conflicting declarations, see NOTICE.md",
+  "license_status": "conflicting-upstream-declarations",
+  "notice_file": "NOTICE.md",
+  "input_size": 640,
+  "task": "head-detection",
+  "output_format": "yolov8-raw-single-class"
+}
